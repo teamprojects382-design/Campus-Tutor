@@ -1,0 +1,1 @@
+CampusTutor is a Next.js App Router app with TypeScript, Tailwind, shadcn/ui, Supabase, and Zod. Follow the hard rules in CLAUDE.md: verify APIs, no any, no secrets, server-only database access, RLS required, validate external input and AI output, and keep changes scoped to the authorized study space. See CLAUDE.md and docs/ for the source of truth.

@@ -1,0 +1,1 @@
+CampusTutor uses Next.js App Router, TypeScript, Tailwind, shadcn/ui, Supabase, and Zod. Follow the hard rules in CLAUDE.md: verify APIs, no any, no secrets, server-only database access, RLS required, validate external input and AI output, and stay scoped to the authorized study space. See docs/ and CLAUDE.md for the full source of truth.
