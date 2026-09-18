@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CampusTutor
 
-## Getting Started
+CampusTutor is an AI revision tutor for university students. Phase 0 sets up the foundation: project scaffold, environment validation, Supabase integration, and a minimal landing page.
 
-First, run the development server:
+## Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js 20+
+- pnpm 9+
+- A Supabase project or a local Supabase instance
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Install dependencies:
+   `pnpm install`
+2. Copy the example env file:
+   `cp .env.example .env.local`
+3. Fill in the required values for your environment.
+4. Run the development server:
+   `pnpm dev`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment variables
 
-## Learn More
+The app validates required environment settings at module load. See `.env.example` for the exact required variables, including the Supabase public keys and the AI defaults.
 
-To learn more about Next.js, take a look at the following resources:
+## Running Supabase migrations
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Start the local Supabase stack:
+   `supabase start`
+2. Push local migrations:
+   `supabase db push`
+3. Check status if needed:
+   `supabase status`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Scripts
 
-## Deploy on Vercel
+- `pnpm dev` — start the Next.js app
+- `pnpm build` — production build
+- `pnpm start` — run the production build locally
+- `pnpm lint` — lint the project
+- `pnpm lint:fix` — autofix safe linting issues
+- `pnpm format` — format files with Prettier
+- `pnpm typecheck` — TypeScript validation
+- `pnpm test` — run Vitest tests
+- `pnpm test:watch` — watch Vitest tests
+- `pnpm test:e2e` — Playwright end-to-end tests
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `src/app` — App Router pages and global layout
+- `src/components/ui` — shadcn-compatible UI primitives
+- `src/features` — domain modules for future tasks
+- `src/lib` — environment, logging, errors, result wrappers, and Supabase clients
+- `supabase/migrations` — SQL migrations
+- `tests/unit` — unit tests
+- `tests/e2e` — Playwright tests
+
+## Deployment notes
+
+This Phase 0 release intentionally keeps deployment assumptions minimal. Hosted deployment should only be planned after verifying the required Supabase and environment settings in the target environment.

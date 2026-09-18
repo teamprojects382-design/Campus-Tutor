@@ -7,6 +7,7 @@
 5. Update project documentation when behavior changes.
 
 ## Conventional commits
+
 Use commit messages in the form:
 
 - `feat: add study-space scoping`
