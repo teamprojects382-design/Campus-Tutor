@@ -32,8 +32,10 @@ export async function proxy(request: NextRequest) {
     },
   });
 
-  const { data } = await supabase.auth.getSession();
-  const isAuthenticated = Boolean(data.session);
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const isAuthenticated = Boolean(user);
 
   if (isProtectedRoute && !isAuthenticated) {
     const loginUrl = new URL("/login", request.url);

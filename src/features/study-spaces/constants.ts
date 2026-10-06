@@ -1,0 +1,1 @@
+export const MAX_STUDY_SPACES_PER_USER = 20;
