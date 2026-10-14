@@ -27,20 +27,36 @@ id references auth.users(id).
 
 ## study_spaces
 
+Status: **IMPLEMENTED** in `supabase/migrations/0003_study_spaces.sql`.
+
 Fields:
 
-- id UUID primary key
-- user_id UUID
+- id UUID primary key, generated with `gen_random_uuid()`
+- user_id UUID, references `auth.users(id)` with `ON DELETE CASCADE`
 - name
 - description
 - course_code
 - created_at
 - updated_at
 
-Indexes:
+Constraints:
 
-- user_id
-- created_at
+- `name` must contain between 1 and 100 characters after trimming.
+- `description` is nullable and limited to 500 characters.
+- `course_code` is nullable and, when present, limited to 1–20 characters.
+
+Index:
+
+- `(user_id, created_at DESC)`
+
+Grants:
+
+- All privileges are revoked from `anon` and `authenticated` before specific grants are applied.
+- `authenticated` may select and delete rows.
+- `authenticated` may insert only `user_id`, `name`, `description`, and `course_code`.
+- `authenticated` may update only `name`, `description`, and `course_code`; ownership and creation metadata cannot be changed.
+
+RLS is enabled with policies restricting SELECT, INSERT, UPDATE, and DELETE to rows whose `user_id` equals `(select auth.uid())`. The table's `updated_at` value is maintained by the `set_updated_at()` trigger.
 
 ---
 

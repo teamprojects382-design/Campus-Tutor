@@ -1,7 +1,9 @@
 import { test, expect } from "@playwright/test";
 
-test.describe.skip("study spaces e2e", () => {
-  test("TODO: unskip after Phase 1 merge", async () => {
-    expect(true).toBe(true);
+test.describe("study spaces e2e", () => {
+  test("redirects unauthenticated users to sign in", async ({ page }) => {
+    await page.goto("/study-spaces");
+
+    await expect(page).toHaveURL(/\/login\?next=%2Fstudy-spaces$/);
   });
 });
