@@ -4,7 +4,7 @@ import { NextResponse, type NextRequest } from "next/server";
 export async function proxy(request: NextRequest) {
   const response = NextResponse.next({ request: { headers: request.headers } });
   const pathname = request.nextUrl.pathname;
-  const isProtectedRoute = pathname.startsWith("/dashboard");
+  const isProtectedRoute = pathname.startsWith("/dashboard") || pathname.startsWith("/study-spaces");
   const isAuthRoute = ["/login", "/signup", "/forgot-password", "/update-password", "/check-email"].includes(pathname);
 
   // This proxy is not the security boundary. The server-side auth checks in requireUser() are.
@@ -32,8 +32,10 @@ export async function proxy(request: NextRequest) {
     },
   });
 
-  const { data } = await supabase.auth.getSession();
-  const isAuthenticated = Boolean(data.session);
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const isAuthenticated = Boolean(user);
 
   if (isProtectedRoute && !isAuthenticated) {
     const loginUrl = new URL("/login", request.url);

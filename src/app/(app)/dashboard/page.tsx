@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getMyProfile } from "@/features/users/getMyProfile";
 
 export const dynamic = "force-dynamic";
@@ -16,6 +17,12 @@ export default async function DashboardPage() {
       <p className="mt-3 text-slate-600 dark:text-slate-300">
         Your study workspace is ready for the next phase.
       </p>
+      <Link
+        href="/study-spaces"
+        className="mt-6 inline-flex rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2"
+      >
+        My courses
+      </Link>
     </section>
   );
 }

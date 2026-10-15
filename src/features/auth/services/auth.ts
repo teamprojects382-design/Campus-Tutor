@@ -13,7 +13,7 @@ export async function getCurrentUser() {
   return data.user;
 }
 
-export function redirectToLogin(nextTarget?: unknown) {
+export function redirectToLogin(nextTarget?: unknown): never {
   const safeNext = safeRedirectPath(nextTarget, "/dashboard");
   redirect(`/login?next=${encodeURIComponent(safeNext)}`);
 }
